@@ -1,0 +1,112 @@
+//////////////////////////
+Нужно написать функцию, которая возвращает тип входного аргумента
+function return_type(x) {
+ 
+   return typeof(x)
+
+}
+
+g = 12;
+
+console.log(g,'is',return_type(g))
+/////////////////////////
+
+
+//////////////////////
+Что выведется в консоль и почему?
+const a = () => console.log("a");
+const b = () => console.log("b");
+const c = a || b ? a() : b();
+console.log(c);
+выведется a b undefined, a,b-String, которые мы прописали в console.log, c - undefined, так как ему присваиваются
+действия между конст а,b но они пустые, т.е. c объявлена, но не инициализирована
+///////////////////
+
+Задание: Нужно реализовать функцию, возвращающая сумму всех аргументов,
+если тип аргумента - число. Вызовов ВСЕГДА 5
+
+function count(num) {
+    if (typeof num !== 'number') {
+    return count;
+    }
+    let summ = num;
+    function count2(nextnum) {
+        if (typeof nextnum === 'number') {
+            summ += nextnum;
+        }
+        return count2;
+    }
+    count2.toString = function () {
+        return summ;
+    };
+    return count2;
+}
+
+alert(+count(1)(2)('asd')(null))
+
+///////////////////////////////
+: Реализовать функцию convertArrToObj, которая на вход принимает
+массив значений, а на выход отдает объект, где ключ - это индекс элемента в
+массиве, а значение - сам элемент
+function convertArrtoObj(arr){
+
+    obj = Object.assign({}, arr);
+
+    return obj
+
+}
+
+x = [1, null, 'test', undefined];
+
+alert(convertArrtoObj(x));
+////////////////////////////
+
+Требуется реализовать функцию countFromArr, которая позволяет
+подсчитать значения массива. На вход поступает массив, на выход получаем
+объект, где ключ - это элемент массива, а значение - его кол-во в массиве
+
+function countFromArr(arr) {
+    const countobj = {};
+    let i = 0;
+    for (i = 0; i < arr.length; i++) {
+        const el = arr[i];
+        if (countobj[el]) {
+            countobj[el] += 1;
+        } else {
+            countobj[el] = 1;
+        }
+    }
+    return countobj;
+    }
+const arr = [1, 1, 1, 'test', 'test'];
+const res = countFromArr(arr);
+console.log(res);
+
+/////////////////////////////
+Требуется реализовать функцию groupByField, которая позволяет
+сгруппировать массив объектов по определенному полю этого объекта. 
+На вход поступает массив объектов и строка с названием нужного поля, на выход
+объект - где ключом является значение поля объекта, а значением - массив
+объектов где значение в поле равно этому ключу ?? (надеюсь в примере будет
+понятней)
+
+function groupByField(arr, field) {
+    const groupedobj = {};
+    let i = 0;
+    for (i = 0; i < arr.length; i++) {
+        const obj = arr[i];
+        const val = obj[field];
+        if (groupedobj[val]) {
+            groupedobj[val].push(obj);
+        } else {
+        groupedobj[val] = [obj];
+        }
+    }
+    return groupedobj;
+}
+const arr = [{test: 1},{test: 2},{test: 3},{test: 1},{test: 1}];
+const res = groupByField(arr, 'test');
+console.log(res);
+
+
+///////////////////////////////
